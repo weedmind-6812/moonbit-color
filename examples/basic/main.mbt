@@ -29,7 +29,7 @@ fn main {
   println("\n4. Gradient Generation:")
   let gradient = @color.RGB::gradient(color1, color2, 5)
   println("  5-step gradient:")
-  for i = 0; i < gradient.length(); i = i + 1 {
+  for i in 0..<gradient.length() {
     println("    Step " + i.to_string() + ": " + gradient[i].to_hex())
   }
 
@@ -52,19 +52,19 @@ fn main {
 
   println("  Triadic palette:")
   let triadic = base.triadic()
-  for i = 0; i < triadic.length(); i = i + 1 {
+  for i in 0..<triadic.length() {
     println("    " + triadic[i].to_hex())
   }
 
   println("\n  Analogous palette (5 colors):")
   let analogous = base.analogous(5)
-  for i = 0; i < analogous.length(); i = i + 1 {
+  for i in 0..<analogous.length() {
     println("    " + analogous[i].to_hex())
   }
 
   println("\n  Monochromatic palette:")
   let mono = base.monochromatic(5)
-  for i = 0; i < mono.length(); i = i + 1 {
+  for i in 0..<mono.length() {
     println("    " + mono[i].to_hex())
   }
 
