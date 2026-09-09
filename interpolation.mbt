@@ -37,7 +37,7 @@ fn lerp_hue(h1 : Double, h2 : Double, t : Double) -> Double {
 // Generate a gradient of n colors between start and end
 pub fn RGB::gradient(start : RGB, end : RGB, steps : Int) -> Array[RGB] {
   let result = Array::new()
-  for i = 0; i < steps; i = i + 1 {
+  for i in 0..<steps {
     let t = i.to_double() / (steps - 1).to_double()
     result.push(RGB::lerp(start, end, t))
   }
@@ -54,11 +54,11 @@ pub fn RGB::multi_gradient(colors : Array[RGB], steps : Int) -> Array[RGB] {
   let segments = colors.length() - 1
   let steps_per_segment = steps / segments
 
-  for i = 0; i < segments; i = i + 1 {
+  for i in 0..<segments {
     let start = colors[i]
     let end = colors[i + 1]
 
-    for j = 0; j < steps_per_segment; j = j + 1 {
+    for j in 0..<steps_per_segment {
       let t = j.to_double() / steps_per_segment.to_double()
       result.push(RGB::lerp(start, end, t))
     }
