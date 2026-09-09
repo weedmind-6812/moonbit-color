@@ -84,8 +84,8 @@ pub fn RGB::to_hsl(self : RGB) -> HSL {
   let r = self.r
   let g = self.g
   let b = self.b
-  let max = @math.maximum(r, @math.maximum(g, b))
-  let min = @math.minimum(r, @math.minimum(g, b))
+  let max = r.max(g.max(b))
+  let min = r.min(g.min(b))
   let delta = max - min
 
   let l = (max + min) / 2.0
@@ -147,8 +147,8 @@ pub fn RGB::to_hsv(self : RGB) -> HSV {
   let r = self.r
   let g = self.g
   let b = self.b
-  let max = @math.maximum(r, @math.maximum(g, b))
-  let min = @math.minimum(r, @math.minimum(g, b))
+  let max = r.max(g.max(b))
+  let min = r.min(g.min(b))
   let delta = max - min
 
   let v = max
