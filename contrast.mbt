@@ -10,7 +10,7 @@ fn gamma_correct(c : Double) -> Double {
   if c <= 0.03928 {
     c / 12.92
   } else {
-    @math.pow((c + 0.055) / 1.055, 2.4)
+    ((c + 0.055) / 1.055).pow(2.4)
   }
 }
 
@@ -18,8 +18,8 @@ fn gamma_correct(c : Double) -> Double {
 pub fn RGB::contrast_ratio(a : RGB, b : RGB) -> Double {
   let l1 = a.luminance()
   let l2 = b.luminance()
-  let lighter = @math.maximum(l1, l2)
-  let darker = @math.minimum(l1, l2)
+  let lighter = l1.max(l2)
+  let darker = l1.min(l2)
   (lighter + 0.05) / (darker + 0.05)
 }
 
