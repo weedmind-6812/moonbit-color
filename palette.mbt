@@ -4,7 +4,7 @@ pub fn RGB::analogous(self : RGB, count : Int) -> Array[RGB] {
   let result = Array::new()
   let step = 30.0
 
-  for i = 0; i < count; i = i + 1 {
+  for i in 0..<count {
     let offset = (i - count / 2).to_double() * step
     let h = (hsl.h + offset + 360.0) % 360.0
     result.push(HSL::to_rgb({ h, s: hsl.s, l: hsl.l }))
@@ -46,7 +46,7 @@ pub fn RGB::monochromatic(self : RGB, count : Int) -> Array[RGB] {
   let hsl = self.to_hsl()
   let result = Array::new()
 
-  for i = 0; i < count; i = i + 1 {
+  for i in 0..<count {
     let l = 0.2 + (i.to_double() / (count - 1).to_double()) * 0.6
     result.push(HSL::to_rgb({ h: hsl.h, s: hsl.s, l }))
   }
