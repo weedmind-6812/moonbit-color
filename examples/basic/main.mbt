@@ -1,3 +1,4 @@
+///|
 fn main {
   println("=== MoonBit Color Library Demo ===\n")
 
@@ -13,10 +14,24 @@ fn main {
   println("\n2. Color Space Conversions:")
   let red = @color.RGB::from_int(255, 87, 51)
   let hsl = red.to_hsl()
-  println("  RGB to HSL - H: " + hsl.h.to_string() + " S: " + hsl.s.to_string() + " L: " + hsl.l.to_string())
+  println(
+    "  RGB to HSL - H: " +
+    hsl.h.to_string() +
+    " S: " +
+    hsl.s.to_string() +
+    " L: " +
+    hsl.l.to_string(),
+  )
 
   let hsv = red.to_hsv()
-  println("  RGB to HSV - H: " + hsv.h.to_string() + " S: " + hsv.s.to_string() + " V: " + hsv.v.to_string())
+  println(
+    "  RGB to HSV - H: " +
+    hsv.h.to_string() +
+    " S: " +
+    hsv.s.to_string() +
+    " V: " +
+    hsv.v.to_string(),
+  )
 
   // Color interpolation
   println("\n3. Color Interpolation:")
@@ -39,8 +54,12 @@ fn main {
   let black = @color.RGB::from_int(0, 0, 0)
   let ratio = @color.RGB::contrast_ratio(white, black)
   println("  White vs Black contrast: " + ratio.to_string() + ":1")
-  println("  Meets WCAG AA: " + @color.RGB::meets_wcag_aa(white, black).to_string())
-  println("  Meets WCAG AAA: " + @color.RGB::meets_wcag_aaa(white, black).to_string())
+  println(
+    "  Meets WCAG AA: " + @color.RGB::meets_wcag_aa(white, black).to_string(),
+  )
+  println(
+    "  Meets WCAG AAA: " + @color.RGB::meets_wcag_aaa(white, black).to_string(),
+  )
 
   // Palette generation
   println("\n6. Palette Generation:")

@@ -1,9 +1,0 @@
-{
-  "is-main": true,
-  "import": [
-    {
-      "path": "weedmind-6812/moonbit-color",
-      "alias": "color"
-    }
-  ]
-}

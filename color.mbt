@@ -1,4 +1,5 @@
 // RGB color representation with floating-point components (0.0-1.0)
+///|
 pub struct RGB {
   r : Double
   g : Double
@@ -6,33 +7,47 @@ pub struct RGB {
 }
 
 // HSL color representation (Hue: 0-360, Saturation: 0-1, Lightness: 0-1)
+
+///|
 pub struct HSL {
   h : Double
   s : Double
   l : Double
 }
 
+///|
 pub fn HSL::new(h : Double, s : Double, l : Double) -> HSL {
   { h, s, l }
 }
 
 // HSV color representation (Hue: 0-360, Saturation: 0-1, Value: 0-1)
+
+///|
 pub struct HSV {
   h : Double
   s : Double
   v : Double
 }
 
+///|
 pub fn HSV::new(h : Double, s : Double, v : Double) -> HSV {
   { h, s, v }
 }
 
 // Create RGB from 0-255 integer values
+
+///|
 pub fn RGB::from_int(r : Int, g : Int, b : Int) -> RGB {
-  { r: r.to_double() / 255.0, g: g.to_double() / 255.0, b: b.to_double() / 255.0 }
+  {
+    r: r.to_double() / 255.0,
+    g: g.to_double() / 255.0,
+    b: b.to_double() / 255.0,
+  }
 }
 
 // Create RGB from hex string (e.g., "#FF5733" or "FF5733")
+
+///|
 pub fn RGB::from_hex(hex : String) -> RGB {
   let h = if hex.has_prefix("#") { hex[1:].to_owned() } else { hex }
   let r = parse_hex_pair(h[0:2].to_owned())
@@ -41,12 +56,14 @@ pub fn RGB::from_hex(hex : String) -> RGB {
   RGB::from_int(r, g, b)
 }
 
+///|
 fn parse_hex_pair(s : String) -> Int {
   let c1 = hex_char_to_int(s[0].to_int().unsafe_to_char())
   let c2 = hex_char_to_int(s[1].to_int().unsafe_to_char())
   c1 * 16 + c2
 }
 
+///|
 fn hex_char_to_int(c : Char) -> Int {
   match c {
     '0' => 0
@@ -70,6 +87,8 @@ fn hex_char_to_int(c : Char) -> Int {
 }
 
 // Convert RGB to hex string
+
+///|
 pub fn RGB::to_hex(self : RGB) -> String {
   let r = (self.r * 255.0).to_int()
   let g = (self.g * 255.0).to_int()
@@ -77,12 +96,14 @@ pub fn RGB::to_hex(self : RGB) -> String {
   "#" + int_to_hex(r) + int_to_hex(g) + int_to_hex(b)
 }
 
+///|
 fn int_to_hex(n : Int) -> String {
   let h1 = n / 16
   let h2 = n % 16
   String::from_array([hex_digit(h1), hex_digit(h2)])
 }
 
+///|
 fn hex_digit(n : Int) -> Char {
   match n {
     0 => '0'
@@ -106,6 +127,8 @@ fn hex_digit(n : Int) -> Char {
 }
 
 // Convert RGB to HSL
+
+///|
 pub fn RGB::to_hsl(self : RGB) -> HSL {
   let r = self.r
   let g = self.g
@@ -120,11 +143,7 @@ pub fn RGB::to_hsl(self : RGB) -> HSL {
     return { h: 0.0, s: 0.0, l }
   }
 
-  let s = if l < 0.5 {
-    delta / (max + min)
-  } else {
-    delta / (2.0 - max - min)
-  }
+  let s = if l < 0.5 { delta / (max + min) } else { delta / (2.0 - max - min) }
 
   let h = if r == max {
     ((g - b) / delta + (if g < b { 6.0 } else { 0.0 })) * 60.0
@@ -138,6 +157,8 @@ pub fn RGB::to_hsl(self : RGB) -> HSL {
 }
 
 // Convert HSL to RGB
+
+///|
 pub fn HSL::to_rgb(self : HSL) -> RGB {
   let h = self.h
   let s = self.s
@@ -157,18 +178,31 @@ pub fn HSL::to_rgb(self : HSL) -> RGB {
   { r, g, b }
 }
 
+///|
 fn hue_to_rgb(p : Double, q : Double, t : Double) -> Double {
   let mut t = t
-  if t < 0.0 { t = t + 360.0 }
-  if t > 360.0 { t = t - 360.0 }
+  if t < 0.0 {
+    t = t + 360.0
+  }
+  if t > 360.0 {
+    t = t - 360.0
+  }
 
-  if t < 60.0 { return p + (q - p) * t / 60.0 }
-  if t < 180.0 { return q }
-  if t < 240.0 { return p + (q - p) * (240.0 - t) / 60.0 }
+  if t < 60.0 {
+    return p + (q - p) * t / 60.0
+  }
+  if t < 180.0 {
+    return q
+  }
+  if t < 240.0 {
+    return p + (q - p) * (240.0 - t) / 60.0
+  }
   p
 }
 
 // Convert RGB to HSV
+
+///|
 pub fn RGB::to_hsv(self : RGB) -> HSV {
   let r = self.r
   let g = self.g
@@ -196,6 +230,8 @@ pub fn RGB::to_hsv(self : RGB) -> HSV {
 }
 
 // Convert HSV to RGB
+
+///|
 pub fn HSV::to_rgb(self : HSV) -> RGB {
   let h = self.h
   let s = self.s

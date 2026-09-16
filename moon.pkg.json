@@ -1,8 +1,0 @@
-{
-  "is-main": false,
-  "import": [
-    "moonbitlang/core/builtin",
-    "moonbitlang/core/double",
-    "moonbitlang/core/math"
-  ]
-}

@@ -1,0 +1,7 @@
+import {
+  "weedmind-6812/moonbit-color" @color,
+}
+
+options(
+  "is-main": true,
+)
