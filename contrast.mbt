@@ -10,7 +10,7 @@ fn gamma_correct(c : Double) -> Double {
   if c <= 0.03928 {
     c / 12.92
   } else {
-    ((c + 0.055) / 1.055).pow(2.4)
+    @math.pow((c + 0.055) / 1.055, 2.4)
   }
 }
 

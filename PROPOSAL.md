@@ -2,7 +2,7 @@
 
 ## 基本信息
 - **项目名称**：moonbit-color - MoonBit 色彩处理库
-- **GitHub 仓库链接**：[待填写]
+- **GitHub 仓库链接**：https://github.com/weedmind-6812/moonbit-color
 - **项目方向**：MoonBit 图形/可视化基础库
 - **是否为移植项目**：否，原创项目（参考色彩理论和WCAG标准）
 

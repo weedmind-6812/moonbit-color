@@ -1,29 +1,30 @@
 // RGB color representation with floating-point components (0.0-1.0)
-struct RGB {
+pub struct RGB {
   r : Double
   g : Double
   b : Double
 }
 
 // HSL color representation (Hue: 0-360, Saturation: 0-1, Lightness: 0-1)
-struct HSL {
+pub struct HSL {
   h : Double
   s : Double
   l : Double
 }
 
+pub fn HSL::new(h : Double, s : Double, l : Double) -> HSL {
+  { h, s, l }
+}
+
 // HSV color representation (Hue: 0-360, Saturation: 0-1, Value: 0-1)
-struct HSV {
+pub struct HSV {
   h : Double
   s : Double
   v : Double
 }
 
-// LAB color representation (L: 0-100, a: -128 to 127, b: -128 to 127)
-struct LAB {
-  l : Double
-  a : Double
-  b : Double
+pub fn HSV::new(h : Double, s : Double, v : Double) -> HSV {
+  { h, s, v }
 }
 
 // Create RGB from 0-255 integer values
@@ -33,25 +34,37 @@ pub fn RGB::from_int(r : Int, g : Int, b : Int) -> RGB {
 
 // Create RGB from hex string (e.g., "#FF5733" or "FF5733")
 pub fn RGB::from_hex(hex : String) -> RGB {
-  let h = if hex.starts_with("#") { hex.substring(1) } else { hex }
-  let r = parse_hex_pair(h.substring(0, end=2))
-  let g = parse_hex_pair(h.substring(2, end=4))
-  let b = parse_hex_pair(h.substring(4, end=6))
+  let h = if hex.has_prefix("#") { hex[1:].to_owned() } else { hex }
+  let r = parse_hex_pair(h[0:2].to_owned())
+  let g = parse_hex_pair(h[2:4].to_owned())
+  let b = parse_hex_pair(h[4:6].to_owned())
   RGB::from_int(r, g, b)
 }
 
 fn parse_hex_pair(s : String) -> Int {
-  let c1 = hex_char_to_int(s[0])
-  let c2 = hex_char_to_int(s[1])
+  let c1 = hex_char_to_int(s[0].to_int().unsafe_to_char())
+  let c2 = hex_char_to_int(s[1].to_int().unsafe_to_char())
   c1 * 16 + c2
 }
 
 fn hex_char_to_int(c : Char) -> Int {
   match c {
-    '0' => 0  '1' => 1  '2' => 2  '3' => 3  '4' => 4
-    '5' => 5  '6' => 6  '7' => 7  '8' => 8  '9' => 9
-    'a' | 'A' => 10  'b' | 'B' => 11  'c' | 'C' => 12
-    'd' | 'D' => 13  'e' | 'E' => 14  'f' | 'F' => 15
+    '0' => 0
+    '1' => 1
+    '2' => 2
+    '3' => 3
+    '4' => 4
+    '5' => 5
+    '6' => 6
+    '7' => 7
+    '8' => 8
+    '9' => 9
+    'a' | 'A' => 10
+    'b' | 'B' => 11
+    'c' | 'C' => 12
+    'd' | 'D' => 13
+    'e' | 'E' => 14
+    'f' | 'F' => 15
     _ => 0
   }
 }
@@ -72,9 +85,22 @@ fn int_to_hex(n : Int) -> String {
 
 fn hex_digit(n : Int) -> Char {
   match n {
-    0 => '0'  1 => '1'  2 => '2'  3 => '3'  4 => '4'
-    5 => '5'  6 => '6'  7 => '7'  8 => '8'  9 => '9'
-    10 => 'A'  11 => 'B'  12 => 'C'  13 => 'D'  14 => 'E'  15 => 'F'
+    0 => '0'
+    1 => '1'
+    2 => '2'
+    3 => '3'
+    4 => '4'
+    5 => '5'
+    6 => '6'
+    7 => '7'
+    8 => '8'
+    9 => '9'
+    10 => 'A'
+    11 => 'B'
+    12 => 'C'
+    13 => 'D'
+    14 => 'E'
+    15 => 'F'
     _ => '0'
   }
 }
